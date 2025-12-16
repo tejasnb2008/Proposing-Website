@@ -1,8 +1,10 @@
-// TYPEWRITER
-const text = `I’ve been thinking a lot...  
-About us, about moments, and about the future.  
-So here I am, asking you something very special.`;
+// SHOW MAIN AFTER INTRO
+setTimeout(() => {
+  document.getElementById("main").classList.remove("hidden");
+}, 4500);
 
+// TYPEWRITER
+const text = "I’ve been thinking about us… and I don’t want a future where you aren’t mine.";
 let i = 0;
 const speed = 45;
 const target = document.getElementById("typewriter");
@@ -14,27 +16,53 @@ function type() {
     setTimeout(type, speed);
   }
 }
-type();
+setTimeout(type, 4500);
 
 // BUTTONS
-const noBtn = document.getElementById("no");
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.position = "absolute";
-  noBtn.style.left = Math.random() * 70 + "%";
-  noBtn.style.top = Math.random() * 70 + "%";
-});
+document.getElementById("no").addEventListener("touchstart", moveNo);
+document.getElementById("no").addEventListener("mouseover", moveNo);
+
+function moveNo(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * 70 + "%";
+  btn.style.top = Math.random() * 70 + "%";
+}
 
 document.getElementById("yes").onclick = () => {
-  document.querySelector(".card").style.display = "none";
-  document.getElementById("final").classList.remove("hidden");
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
 };
 
-// PARTICLES
-const canvas = document.getElementById("bg");
+// HEART PARTICLES
+const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
+let particles = [];
+for (let t = 0; t < 1200; t += 0.15) {
+  const x = 16 * Math.pow(Math.sin(t), 3);
+  const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+  particles.push({
+    x: canvas.width / 2 + x * 15,
+    y: canvas.height / 2 + y * 15,
+    r: Math.random() * 1.5 + 0.5
+  });
+}
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "rgba(255,120,180,0.9)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 let particles = [];
 for (let i = 0; i < 80; i++) {
   particles.push({
