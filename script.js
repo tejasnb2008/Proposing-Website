@@ -1,40 +1,81 @@
-// SHOW MAIN AFTER INTRO
+const intro = document.getElementById("intro");
+const main = document.getElementById("main");
+const letter = document.getElementById("letter");
+const typeTarget = document.getElementById("typewriter");
+
+// INTRO → MAIN
 setTimeout(() => {
-  document.getElementById("main").classList.remove("hidden");
-}, 4500);
+  intro.classList.add("hide");
+  main.classList.remove("hidden");
+  typeText();
+}, 4200);
 
 // TYPEWRITER
 const text = "I’ve been thinking about us… and I don’t want a future where you aren’t mine.";
 let i = 0;
-const speed = 45;
-const target = document.getElementById("typewriter");
 
-function type() {
+function typeText() {
   if (i < text.length) {
-    target.innerHTML += text.charAt(i);
+    typeTarget.innerHTML += text.charAt(i);
     i++;
-    setTimeout(type, speed);
+    setTimeout(typeText, 40);
   }
 }
-setTimeout(type, 4500);
 
-// BUTTONS
-document.getElementById("no").addEventListener("touchstart", moveNo);
-document.getElementById("no").addEventListener("mouseover", moveNo);
+// BUTTON LOGIC
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
 
-function moveNo(e) {
-  e.preventDefault();
-  const btn = e.target;
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * 70 + "%";
-  btn.style.top = Math.random() * 70 + "%";
+function moveNo() {
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * 70 + "%";
+  noBtn.style.top = Math.random() * 70 + "%";
 }
 
-document.getElementById("yes").onclick = () => {
-  document.getElementById("main").classList.add("hidden");
-  document.getElementById("letter").classList.remove("hidden");
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", e => {
+  e.preventDefault();
+  moveNo();
+});
+
+yesBtn.onclick = () => {
+  main.classList.add("hidden");
+  letter.classList.remove("hidden");
 };
 
+// HEART PARTICLES
+const canvas = document.getElementById("heartCanvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+let particles = [];
+for (let t = 0; t < 1200; t += 0.15) {
+  const x = 16 * Math.pow(Math.sin(t), 3);
+  const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+  particles.push({
+    x: canvas.width / 2 + x * 14,
+    y: canvas.height / 2 + y * 14,
+    r: Math.random() * 1.3 + 0.4
+  });
+}
+
+function drawHeart() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(255,120,180,0.85)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(drawHeart);
+}
+drawHeart();
 // HEART PARTICLES
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
