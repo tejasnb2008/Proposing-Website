@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 body {
@@ -20,21 +20,136 @@ canvas {
 
 /* INTRO */
 .intro {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  z-index: 2;
-  animation: fadeOut 1.5s ease forwards;
-  animation-delay: 4s;
+  z-index: 3;
 }
 
 .intro h1 {
-  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 700;
   letter-spacing: 1px;
+}
+
+.intro span {
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.intro.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* MAIN */
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+p {
+  max-width: 600px;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  line-height: 1.7;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.06);
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 0 60px rgba(255,110,196,0.25);
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#yes {
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  color: white;
+}
+
+#no {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* LETTER */
+.letter {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  background: white;
+  color: #222;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 18px;
+  animation: open 1s ease forwards;
+}
+
+.paper h2 {
+  margin-bottom: 15px;
+}
+
+.paper p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes open {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+  }  letter-spacing: 1px;
 }
 
 .intro span {
