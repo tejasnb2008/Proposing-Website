@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Just One Question</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<canvas id="heartCanvas"></canvas>
 
-<div class="container">
-  <h1 class="fade-in">Hey <span class="name">Name</span>,</h1>
+<!-- OPENING TEXT -->
+<div class="intro" id="intro">
+  <h1>One day,<br><span>you will be mine.</span></h1>
+</div>
 
+<!-- MAIN CONTENT -->
+<div class="container hidden" id="main">
   <p id="typewriter"></p>
 
-  <div class="card fade-in delay">
-    <h2>Will you be mine? 💍</h2>
-
+  <div class="card">
+    <h2>Will you be mine forever?</h2>
     <div class="buttons">
       <button id="yes">Yes ❤️</button>
       <button id="no">No 🙃</button>
     </div>
   </div>
+</div>
 
-  <div id="final" class="hidden">
-    <h1>You just made me the happiest person alive ✨</h1>
+<!-- LETTER -->
+<div class="letter hidden" id="letter">
+  <div class="paper">
+    <h2>My Love 💌</h2>
+    <p>
+      From the moment you entered my life,<br><br>
+      everything felt lighter, warmer, and more meaningful.
+      I don’t promise perfection, but I promise honesty,
+      loyalty, and a heart that chooses you every single day.
+      <br><br>
+      This isn’t just a question —  
+      it’s a lifetime invitation.
+    </p>
+    <h3>— Yours ❤️</h3>
   </div>
 </div>
 
